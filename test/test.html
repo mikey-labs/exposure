@@ -24,10 +24,10 @@
     ds.item(0).addEventListener("click",add)
     function add() {
         console.log("add")
-        exposure.observe(ds.item(3),function (isIntersecting) {
+        exposure.observe(ds.item(3),function (isIntersecting,stop) {
             console.log(isIntersecting)
             if(isIntersecting){
-                exposure.unobserve(ds.item(3))
+                stop()
             }
         });
     }

@@ -16,6 +16,7 @@ export default class Exposure {
                 (target as IElement).callback.call(
                     null,
                     isIntersecting,
+                    ()=>observer.unobserve(target),
                     ...arguments
                 );
             })
