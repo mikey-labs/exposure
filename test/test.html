@@ -4,33 +4,37 @@
     <meta charset="UTF-8">
     <title>test</title>
 </head>
-<body>
+<body style="padding: 0;margin: 0;">
     <div id="d1" style="height: 500px;width: 100%;background: black">
 
     </div>
-    <div style="height: 400px;width: 100%;background: yellow">
+    <div style="height: 400px;width: 3000px;background: yellow">
 
     </div>
     <div style="height: 200px;width: 100%;background: rebeccapurple">
 
     </div>
-    <div id="d4" style="height: 200px;width: 100%;background: red">
+    <div id="d4" style="height: 200px;width: 3000px;background: red">
 
     </div>
 <script type="module">
     import Exposure from "../dist/index.esm.mjs";
     const ds = document.getElementsByTagName("div");
     const exposure = new Exposure();
-    ds.item(0).addEventListener("click",add)
+    window.addEventListener("scroll",exposure.scrollEventHandler.bind(exposure)
+    );
+
+    // ds.item(0).addEventListener("click",add)
     function add() {
         console.log("add")
-        exposure.observe(ds.item(3),function (isIntersecting,stop) {
+        exposure.observeByScroll(ds.item(3),function (isIntersecting,stop) {
             console.log(isIntersecting)
             if(isIntersecting){
                 stop()
             }
         });
     }
+    add()
     // setTimeout(()=>{
     //     exposure.unobserve();
     // },3000)
