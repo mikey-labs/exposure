@@ -1,5 +1,5 @@
 import ScrollObserver from "./ScrollObserver";
-import {ClientSize, IElement} from "./Types";
+import {ClientSize, IElement, IPosition} from "./Types";
 
 function getElements(el:Element | Element[] | HTMLCollection):Element[]{
     return Array.isArray(el) || el instanceof HTMLCollection ? Array.from(el) : [el];
@@ -29,8 +29,10 @@ export default class Exposure {
         el.callback = callback;
         this.Observer.observe(el);
     }
-    scrollEventHandler(){
-       this.ScrObserver.onScroll()
+    scrollEventHandler(
+        position:IPosition={left:0,top:0}
+){
+       this.ScrObserver.onScroll(position)
     }
     observeByScroll(el:IElement,callback:Function){
         el.callback = callback;
