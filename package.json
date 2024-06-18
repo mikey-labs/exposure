@@ -1,6 +1,6 @@
 {
-    "name": "@zhengxy/exposure",
-    "version": "0.0.1-beta.6",
+    "name": "@zaobao/exposure",
+    "version": "0.0.9",
     "description": "exposure dom for vue,react,jquery",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.mjs",
@@ -10,7 +10,8 @@
         "build": "pnpm clear && pnpm build:bundle && pnpm build:types",
         "clear": "rimraf ./dist",
         "build:types": "tsc -p ./tsconfig.json",
-        "build:bundle": "node ./build.js"
+        "build:bundle": "node ./build.js",
+        "release": "release-it"
     },
     "exports": {
         ".": {
@@ -26,7 +27,7 @@
     "sideEffects": false,
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/mikey-labs/use.git"
+        "url": "git+https://github.com/mikey-labs/exposure.git"
     },
     "keywords": [
         "utils",
@@ -36,12 +37,13 @@
     "author": "mikey",
     "license": "MIT",
     "bugs": {
-        "url": "https://github.com/mikey-labs/use/issues"
+        "url": "https://github.com/mikey-labs/exposure/issues"
     },
-    "homepage": "https://github.com/mikey-labs/use#readme",
+    "homepage": "https://github.com/mikey-labs/exposure#readme",
     "devDependencies": {
         "esbuild": "^0.17.19",
         "prettier": "^2.8.8",
+        "release-it": "^17.3.0",
         "rimraf": "^4.4.1",
         "typescript": "^4.9.5"
     },

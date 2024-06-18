@@ -10,6 +10,7 @@ const bundle = (format) => {
         bundle: true,
         target: ["chrome53"],
         outfile,
+        minify: true,
         charset: "utf8",
         entryPoints: ["./src/index.ts"],
     };

@@ -1,12 +1,10 @@
-import ScrollObserver from "./ScrollObserver";
-import {ClientSize, IElement, IPosition} from "./Types";
+import {IElement} from "./Types";
 
-function getElements(el:Element | Element[] | HTMLCollection):Element[]{
-    return Array.isArray(el) || el instanceof HTMLCollection ? Array.from(el) : [el];
+function getElements(el:IElement | IElement[] | HTMLCollection):IElement[]{
+    return Array.isArray(el) || el instanceof HTMLCollection ? Array.from(el as IElement[]) : [el as IElement];
 }
 export default class Exposure {
     private Observer:IntersectionObserver;
-    private ScrObserver:ScrollObserver;
 
     constructor(
         options: IntersectionObserverInit = {threshold: 0.3 }
@@ -23,35 +21,17 @@ export default class Exposure {
             })
         };
         this.Observer = new IntersectionObserver(callback,options);
-        this.ScrObserver = new ScrollObserver(options);
     }
-    observe(el:IElement,callback:Function){
-        el.callback = callback;
-        this.Observer.observe(el);
+
+    observe(els:IElement | IElement[],callback:Function){
+        getElements(els).map((el)=>{
+            el.callback = callback;
+            this.Observer.observe(el);
+        })
+
     }
-    scrollEventHandler(
-        position:IPosition={left:0,top:0}
-){
-       this.ScrObserver.onScroll(position)
-    }
-    observeByScroll(el:IElement,callback:Function){
-        el.callback = callback;
-        this.ScrObserver.observe(el);
-    }
-    unobserve(el:Element | Element[] | HTMLCollection){
+    unobserve(el:IElement | IElement[] | HTMLCollection){
         getElements(el).map((target)=>this.Observer.unobserve(target));
-    }
-    unobserveByScroll(el:Element | Element[] | HTMLCollection){
-        getElements(el).map((target)=>{
-            const findIndex = this.ScrObserver.getRefs().findIndex(({element:ref})=>ref === target);
-            if(findIndex >= 0)this.ScrObserver.unobserve(findIndex);
-        });
-    }
-    setClientSize(size:ClientSize){
-        this.ScrObserver.setClientSize(size);
-    }
-    stopByScroll(){
-        this.ScrObserver.stop()
     }
     stop(){
         this.Observer.disconnect();

@@ -21,23 +21,30 @@
     import Exposure from "../dist/index.esm.mjs";
     const ds = document.getElementsByTagName("div");
     const exposure = new Exposure();
-    window.addEventListener("scroll",exposure.scrollEventHandler.bind(exposure)
-    );
+    console.log(ds)
+    exposure.observe(ds,add)
 
-    // ds.item(0).addEventListener("click",add)
-    function add() {
-        console.log("add")
-        exposure.observeByScroll(ds.item(3),function (isIntersecting,stop) {
-            console.log(isIntersecting)
-            if(isIntersecting){
-                stop()
-            }
-        });
+
+    function add(intersection,stop) {
+        if (intersection) {
+            stop()
+            console.log("add")
+        }
     }
-    add()
-    // setTimeout(()=>{
-    //     exposure.unobserve();
-    // },3000)
+    setTimeout(()=>{
+        exposure.unobserve(ds);
+    },3000)
+
+
+        // exposure.observeByScroll(ds.item(3),function (isIntersecting,stop) {
+        //     console.log(isIntersecting)
+        //     if(isIntersecting){
+        //         stop()
+        //     }
+        // });
+
+    // add()
+
 </script>
 </body>
 </html>

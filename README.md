@@ -15,17 +15,17 @@ when page load, the plugin will auto call the callback function if dom intersect
 ## Installation
 
 ```sh
-npm i @zhengxy/exposure
+npm i @zaobao/exposure
 ```
 Using `yarn`
 
 ```bash
-yarn add @zhengxy/exposure;
+yarn add @zaobao/exposure;
 ```
 
 Using `pnpm`
 ```bash
-pnpm add @zhengxy/exposure;
+pnpm add @zaobao/exposure;
 ```
 
 
@@ -35,13 +35,13 @@ Using ESM
 
 ```typescript
 // import Api
-import Exposure from "@zhengxy/exposure";
+import Exposure from "@zaobao/exposure";
 ```
 
 Using CommonJs
 
 ```js
-const Exposure = require("@zhengxy/exposure");
+const Exposure = require("@zaobao/exposure");
 ```
 
 Using iife
@@ -52,22 +52,36 @@ Using iife
 ## Getting Started
 
 ```typescript
-    const dom = document.getElementsById("elementId");
-    const exposure = new Exposure();
-    dom.addEventListener("click",add)
-    function add() {
-        let a = 1;
-        exposure.observe(ds.item(3),()=>{
-            console.log(a);
-        });
+type IntersectionObserverInit = {
+    root?: Element | Document | null;
+    rootMargin?: string;
+    threshold?: number | number[];
+}
+declare class Exposure {
+    private Observer;
+    constructor(options?: IntersectionObserverInit);
+    observe(els: IElement | IElement[], callback: Function): void;
+    unobserve(el: IElement | IElement[] | HTMLCollection): void;
+    stop(): void;
+}
+
+//example
+    const doms = document.querySelector(".class");
+    const exposure = new Exposure(
+        options
+    );
+    const callback = (isIntersection,stop)=>{
+        if(isIntersection){
+            stop()
+            //todo
+        }
     }
+    exposure.observe(doms,callback)
+
 ```
 
 ## Browser support
- We use `interactionObvser` api for support, if you want use in some very old browsers,The easiest way to load the IntersectionObserver polyfill and have it work in the widest range of browsers is via polyfill.io, which will automatically include dependencies where necessary:
- ```javascript
-<script src="https://polyfill.io/v3/polyfill.min.js?features=IntersectionObserver"></script>
-```
+ We use `interactionObvser` api for support, and add polyfill in very old browser.so you don't do anything for the polyfill，Use it with peace of mind.
 With these polyfills, IntersectionObserver has been tested and known to work in the following browsers:
 <table>
   <tr>
