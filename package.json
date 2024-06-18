@@ -1,6 +1,6 @@
 {
     "name": "@zaobao/exposure",
-    "version": "0.0.9",
+    "version": "1.0.0",
     "description": "exposure dom for vue,react,jquery",
     "main": "dist/index.cjs.js",
     "module": "dist/index.esm.mjs",
@@ -49,5 +49,8 @@
     },
     "dependencies": {
         "intersection-observer": "^0.12.2"
+    },
+    "publishConfig": {
+        "access": "public"
     }
 }
